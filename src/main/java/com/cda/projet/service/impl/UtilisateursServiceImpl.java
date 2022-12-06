@@ -51,4 +51,8 @@ public class UtilisateursServiceImpl implements UtilisateursService {
 	public List<Utilisateurs> getAllUtilisateurs(){
 		return (List<Utilisateurs>) utilisateursRepository.findAll();
 	}
+	
+	public Utilisateurs findByIdUtilisateur(long id) {
+		return utilisateursRepository.findByIdUtilisateur(id);
+	}
 }

@@ -61,4 +61,14 @@ public class UtilisateursController {
 	public Utilisateurs getUtilisateursByPseudo(@PathVariable String pseudo){
 		return utilisateursService.findByPseudo(pseudo);
 	}
+	
+	@GetMapping("/isUserAdmin/{id}")
+	public boolean isUserAdmin(@PathVariable long id) {
+		Utilisateurs utilisateurs = utilisateursService.findByIdUtilisateur(id);
+		if(utilisateurs.getRole().equals("ADMIN")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

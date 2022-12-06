@@ -10,4 +10,5 @@ public interface UtilisateursRepository extends CrudRepository<Utilisateurs, Lon
 
 	Utilisateurs findByPseudo(String pseudo);
 	Utilisateurs findByEmail(String email);
+	Utilisateurs findByIdUtilisateur(Long id);
 }

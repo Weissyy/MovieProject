@@ -14,4 +14,5 @@ public interface UtilisateursService {
 	Utilisateurs findByPseudo(String pseudo);
 	Utilisateurs findByEmail(String email);
 	List<Utilisateurs> getAllUtilisateurs();
+	Utilisateurs findByIdUtilisateur(long id);
 }

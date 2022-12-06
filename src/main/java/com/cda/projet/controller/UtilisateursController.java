@@ -1,5 +1,6 @@
 package com.cda.projet.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cda.projet.entity.Utilisateurs;
@@ -62,9 +65,18 @@ public class UtilisateursController {
 		return utilisateursService.findByPseudo(pseudo);
 	}
 	
-	@GetMapping("/isUserAdmin/{id}")
-	public boolean isUserAdmin(@PathVariable long id) {
-		Utilisateurs utilisateurs = utilisateursService.findByIdUtilisateur(id);
+    @RequestMapping(value = "/nom", method = RequestMethod.GET)
+    @ResponseBody
+    public String currentUserName(Principal principal) {
+        return principal.getName();
+    }
+	
+    @RequestMapping(value = "/isUserAdmin", method = RequestMethod.GET)
+    @ResponseBody
+	public boolean isUserAdmin(Principal principal) {
+    	String nom = principal.getName();
+		Utilisateurs utilisateurs = utilisateursService.findByPseudo(nom.toLowerCase());
+
 		if(utilisateurs.getRole().equals("ADMIN")) {
 			return true;
 		} else {
